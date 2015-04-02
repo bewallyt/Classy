@@ -1,0 +1,26 @@
+<div id="visible_well" class="well">
+    <div class="post">
+        <div class="post__header">
+            <div class="post__meta">
+                <div class="post__date" style="color:#2196f3"><p style="color:#2196f3">{{ post.show_date }}</p></div>
+
+                <div class="day_of_week">{{ post.day_of_week }}</div>
+            </div>
+            <div class="post_attr">
+                <button class="left-side hover-btn mdi-editor-border-color btn btn-default btn-xs"
+                        ng-hide="post.is_holiday"
+                        ng-dialog="/static/templates/posts/update-post.html"
+                        ng-dialog-data="{{ post }}"
+                        ng-dialog-controller="NewPostController as vm">
+                </button>
+                <button class="right-side hover-btn mdi-action-flip-to-front btn btn-default btn-xs"
+                        ng-dialog="/static/templates/posts/post-description.html"
+                        ng-dialog-controller="PostDescriptionController as vm"
+                        ng-click=""
+                        ng-dialog-data="{{ post }}">
+                </button>
+            </div>
+        </div>
+        <div class="post__content">{{ post.content }}</div>
+    </div>
+</div>

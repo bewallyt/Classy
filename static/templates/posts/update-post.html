@@ -1,0 +1,75 @@
+<form role="form" ng-submit="vm.updateEvent()" ng-init="vm.init(ngDialogData.id)">
+    <div class="form-group">
+        <center><h2>Update Event</h2></center>
+        <div class="form-group">
+
+            <input type="text" class="form-control" id="event__name" ng-init="vm.content = ngDialogData.content"
+                   ng-model="vm.content" required>
+            <span class="form-highlight"></span>
+            <span class="form-bar"></span>
+            <label class="float-label" for="event__name">Name of Event</label>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <input type="text" class="form-control" id="event__location"
+                   ng-init="vm.location_event = ngDialogData.location_event" ng-model="vm.location_event" required>
+            <span class="form-highlight"></span>
+            <span class="form-bar"></span>
+            <label class="float-label" for="event__location">Location of Event</label>
+
+        </div>
+
+        <div class="form-group">
+
+            <input type="text" class="form-control" id="event__location"
+                   ng-init="vm.description_event = ngDialogData.description_event" ng-model="vm.description_event"
+                   required>
+            <span class="form-highlight"></span>
+            <span class="form-bar"></span>
+            <label class="float-label" for="event__location">Description of event</label>
+
+        </div>
+
+        <md-input-container flex>
+            <label style="color:#545454">Date of Event</label>
+            <input type="date"  ng-model="vm.start_time">
+        </md-input-container>
+
+        <md-checkbox ng-model="vm.not_all_day">Not all day?</md-checkbox>
+
+        <div ng-show="vm.not_all_day == true">
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label style="color:#545454">Start time</label>
+                    <input type="time" ng-model="vm.begin_time">
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label style="color:#545454">End time</label>
+                    <input type="time" ng-model="vm.end_time">
+                </md-input-container>
+            </div>
+
+            <md-checkbox aria-label="is_pud_time" class="is_pud_time" ng-model="vm.pud_time">Pud allocation
+            </md-checkbox>
+        </div>
+
+        <md-checkbox ng-model="vm.notification">Receive email notifications</md-checkbox>
+        <md-input-container>
+            <label ng-show="vm.notification == true" style="color:#545454">Notification Time</label>
+            <input type="datetime-local" name="notify_when" ng-model="vm.notify_when"
+                   ng-show="vm.notification == true"/>
+        </md-input-container>
+
+
+        <div class="form-group" layout="column" layout-align="center center">
+            <md-button class="md-raised md-primary btn-submit" type="submit">Submit</md-button>
+        </div>
+
+
+    </div>
+
+</form>
