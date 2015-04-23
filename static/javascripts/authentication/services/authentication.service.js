@@ -86,10 +86,10 @@
                 Authentication.setAuthenticatedAccount(data.data);
                 console.log('login successful:' + data.data.userType);
                 if (data.data.userType == 'student') {
-                    window.location = '/';
+                    window.location = '/classy';
                 }
                 else if (data.data.userType == 'teacher') {
-                    window.location = '/';
+                    window.location = '/classy';
                 }
                 else {
                     window.location = '/';

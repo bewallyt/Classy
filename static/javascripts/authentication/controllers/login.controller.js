@@ -21,6 +21,9 @@
 
         vm.register = register;
 
+        vm.showLogin = showLogin;
+        vm.isPrompted = false;
+
         activate();
 
         /**
@@ -61,6 +64,10 @@
 
         function register() {
             Authentication.register(vm.email, vm.password, vm.username, vm.userType);
+        }
+
+        function showLogin(){
+            vm.isPrompted = true;
         }
 
 

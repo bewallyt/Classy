@@ -8,167 +8,175 @@
     <posts posts="vm.posts"></posts>
 </div>
 
-<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1" style="background-color:#2196f3; color:#333333">
+<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1"
+     style="background-color:#2196f3; color:#333333">
     <center><h3 style="background-color:#2196f3; color:#333333">Classrooms</h3></center>
 
 
     <div>
         <accordion close-others="vm.oneAtATime">
-            <accordion-group is-open="vm.isThirdOpen"
-                             is-disabled="status.isThirdDisabled">
-                <accordion-heading>
-                    Notifications <i class="pull-right glyphicon"
-                                     ng-class="{'glyphicon-chevron-down': vm.isThirdOpen, 'glyphicon-chevron-right': !vm.isThirdOpen}"></i>
-                </accordion-heading>
-                <br>
+            <div ng-show="vm.myUserType == 'student'"><
+                <accordion-group is-open="vm.isThirdOpen"
+                                 is-disabled="status.isThirdDisabled">
+                    <accordion-heading>
+                        Open Assignments <i class="pull-right glyphicon"
+                                         ng-class="{'glyphicon-chevron-down': vm.isThirdOpen, 'glyphicon-chevron-right': !vm.isThirdOpen}"></i>
+                    </accordion-heading>
+                    <br>
 
-                <div ng-show="vm.hasNotifications == true"><p class="groups_underline" align="left">New
-                    Notifications</p>
-                    <li ng-repeat="notification in vm.newNotifications">
-                        <a class="btn btn-flat btn-default btn-nopadding"
-                           ng-click="vm.groupClick(group)"
-                           href="javascript:void(0)"
-                           ng-show="vm.isAuthenticated"
-                           ng-dialog="/static/templates/posts/notifications.html"
-                           ng-dialog-controller="AccountController as vm"
-                           ng-dialog-data="{{ notification }}"><p class="group_button_text"
-                                                                  align="left">{{ notification.content }}</p></a>
+                    <div ng-show="vm.hasNotifications == true"><p class="groups_underline" align="left">New
+                        Notifications</p>
+                        <li ng-repeat="notification in vm.newNotifications">
+                            <a class="btn btn-flat btn-default btn-nopadding"
+                               ng-click="vm.groupClick(group)"
+                               href="javascript:void(0)"
+                               ng-show="vm.isAuthenticated"
+                               ng-dialog="/static/templates/posts/notifications.html"
+                               ng-dialog-controller="AccountController as vm"
+                               ng-dialog-data="{{ notification }}"><p class="group_button_text"
+                                                                      align="left">{{ notification.content }}</p></a>
+                        </li>
+                    </div>
+
+                    <h5 ng-hide="vm.hasNotifications == true"> {{ vm.myUsername }} has no notifications</h5>
+                </accordion-group>
+            </div>
+            <div ng-show="vm.myUserType == 'student'">
+                <accordion-group is-open="vm.isSecondOpen"
+                                 is-disabled="status.isSecondDisabled">
+                    <accordion-heading>
+                        Classes <i class="pull-right glyphicon"
+                                   ng-class="{'glyphicon-chevron-down': vm.isSecondOpen, 'glyphicon-chevron-right': !vm.isSecondOpen}"></i>
+                    </accordion-heading>
+                    <br>
+
+
+                    <li ng-show="vm.isFollowing" ng-repeat="following in vm.followingList">
+                        <a type="button" class="btn btn-flat btn-default btn-nopadding" ng-init="singleModel=0"
+                           ng-model="singleModel" btn-checkbox
+                           btn-checkbox-true="1" btn-checkbox-false="0"
+                           ng-click="vm.appendFollowingEvents(singleModel, following.owner.username)">
+                            <p class="group_button_text" align="left">{{ following.owner.username }}</p>
+                        </a>
+
                     </li>
-                </div>
 
-                <h5 ng-hide="vm.hasNotifications == true"> {{ vm.myUsername }} has no notifications</h5>
-            </accordion-group>
-            <accordion-group is-open="vm.isSecondOpen"
-                             is-disabled="status.isSecondDisabled">
-                <accordion-heading>
-                    Following <i class="pull-right glyphicon"
-                                 ng-class="{'glyphicon-chevron-down': vm.isSecondOpen, 'glyphicon-chevron-right': !vm.isSecondOpen}"></i>
-                </accordion-heading>
-                <br>
 
-                <li ng-show="vm.isFollowing" ng-repeat="following in vm.followingList">
-                    <a type="button" class="btn btn-flat btn-default btn-nopadding" ng-init="singleModel=0"
-                       ng-model="singleModel" btn-checkbox
-                       btn-checkbox-true="1" btn-checkbox-false="0"
-                       ng-click="vm.appendFollowingEvents(singleModel, following.owner.username)">
-                        <p class="group_button_text" align="left">{{ following.owner.username }}</p>
-                    </a>
+                    <li ng-show="vm.hasMemberOfGroups" ng-repeat="group in vm.memberOfGroups">
+                        <a type="button" class="btn btn-flat btn-default btn-nopadding" ng-init="singleModel=0"
+                           ng-model="singleModel" btn-checkbox
+                           btn-checkbox-true="1" btn-checkbox-false="0"
+                           ng-click="vm.appendFollowingEvents(singleModel, group.owner.username)">
+                            <p class="group_button_text" align="left">{{ group.name }}</p>
+                        </a>
 
-                </li>
-                <h5 ng-hide="vm.isFollowing"> {{ vm.myUsername }} is not following anyone :(</h5>
-            </accordion-group>
-            <accordion-group is-open="vm.isFirstOpen"
-                             is-disabled="vm.isFirstDisabled">
-                <accordion-heading>
-                    Followers <i class="pull-right glyphicon"
-                                 ng-class="{'glyphicon-chevron-down': vm.isFirstOpen, 'glyphicon-chevron-right': !vm.isFirstOpen}"></i>
-                </accordion-heading>
+                    </li>
+                    <h5 ng-hide="vm.isFollowing"> {{ vm.myUsername }} is enrolled in no classes</h5>
+                </accordion-group>
+            </div>
+            <div ng-show="vm.myUserType == 'teacher'">
+                <accordion-group is-open="vm.isFirstOpen"
+                                 is-disabled="vm.isFirstDisabled">
+                    <accordion-heading>
+                        Students <i class="pull-right glyphicon"
+                                    ng-class="{'glyphicon-chevron-down': vm.isFirstOpen, 'glyphicon-chevron-right': !vm.isFirstOpen}"></i>
+                    </accordion-heading>
 
-                <button type="button" class="mdi-social-person-add btn btn-default btn-lg" data-toggle="collapse"
-                        data-target="#search">
-                </button>
-                <div id="search" class="collapse">
-                    <angucomplete id="search__username" pause="100" selectedobject="vm.selectedUser"
-                                  localdata="vm.users" titlefield="username" searchfields="username" minlength="1"
-                                  inputclass="form-control2" matchclass="highlight" placeholder="Search for user"/>
+                    <br>
 
-                    <button data-toggle="collapse" data-target="#search" ng-show="vm.selectedUser"
-                            ng-click="vm.addFollower()"
-                            class="btn btn-default">
-                        Add Follower
-                    </button>
-                </div>
-                <br>
+                    <li ng-show="vm.hasFollowers" ng-repeat="follower in vm.followerList">
+                        <a class="btn btn-flat btn-default btn-nopadding">
+                            <p class="group_button_text" align="left"> {{ follower.name }}</p></a>
+                    </li>
+                    <h5 ng-hide="vm.hasFollowers"> {{ vm.myUsername }} has no students</h5>
+                </accordion-group>
+            </div>
 
-                <li ng-show="vm.hasFollowers" ng-repeat="follower in vm.followerList">
-                    <a class="btn btn-flat btn-default btn-nopadding">
-                        <p class="group_button_text" align="left"> {{ follower.name }}</p></a>
-                </li>
-                <h5 ng-hide="vm.hasFollowers"> {{ vm.myUsername }} has no followers :(</h5>
-            </accordion-group>
+            <div ng-show="vm.myUserType == 'teacher'">
+                <accordion-group is-open="vm.open">
+                    <accordion-heading>
+                        Classes<i class="pull-right glyphicon"
+                                  ng-class="{'glyphicon-chevron-down': vm.open, 'glyphicon-chevron-right': !vm.open}"></i>
+                    </accordion-heading>
+                    <center>
 
-            <accordion-group is-open="vm.open">
-                <accordion-heading>
-                    Groups<i class="pull-right glyphicon"
-                             ng-class="{'glyphicon-chevron-down': vm.open, 'glyphicon-chevron-right': !vm.open}"></i>
-                </accordion-heading>
-                <center>
-
-                    <button type="button" class="mdi-social-group-add btn btn-default btn-lg"
-                            data-toggle="collapse" data-target="#add_group">
-                    </button>
-                    <div id="add_group" class="collapse">
-                        <form role="form" ng-submit="vm.addGroup()">
-                            <div class="form-group">
+                        <button type="button" class="mdi-social-group-add btn btn-default btn-lg"
+                                data-toggle="collapse" data-target="#add_group">
+                        </button>
+                        <div id="add_group" class="collapse">
+                            <form role="form" ng-submit="vm.addGroup()">
                                 <div class="form-group">
+                                    <div class="form-group">
 
-                                    <input type="text" style="text-align: center; color: #cdf0ed " class="form-control"
-                                           id="group__name"
-                                           ng-model="vm.groupName" required>
-                                    <span class="form-highlight"></span>
-                                    <span class="form-bar"></span>
-                                    <label id="green" class="float-label-center" for="group__name">Group Name</label>
+                                        <input type="text" style="text-align: center; color: #cdf0ed "
+                                               class="form-control"
+                                               id="group__name"
+                                               ng-model="vm.groupName" required>
+                                        <span class="form-highlight"></span>
+                                        <span class="form-bar"></span>
+                                        <label id="green" class="float-label-center" for="group__name">Class
+                                            Name</label>
+
+                                    </div>
+
+
+                                    <angucomplete id="search__members" pause="100" selectedobject="vm.selectedMember"
+                                                  localdata="vm.users" titlefield="username" searchfields="username"
+                                                  minlength="1"
+                                                  inputclass="form-control2" matchclass="highlight"
+                                                  placeholder="Search for students"/>
+
+
+                                    <center><a class="mdi-social-plus-one btn btn-default "
+                                               ng-show="vm.selectedMember"
+                                               ng-click="vm.addMembers()"></a></center>
+
+                                    <li ng-repeat="member in vm.groupMembers">
+                                        {{ member }}
+                                    </li>
+
 
                                 </div>
 
+                                <div class="form-group">
+                                    <button data-toggle="collapse" data-target="#add_group" type="submit"
+                                            class="btn btn-default">
+                                        Create Class
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </center>
+                    <br>
 
-                                <angucomplete id="search__members" pause="100" selectedobject="vm.selectedMember"
-                                              localdata="vm.users" titlefield="username" searchfields="username"
-                                              minlength="1"
-                                              inputclass="form-control2" matchclass="highlight"
-                                              placeholder="Search for group members"/>
-
-
-                                <center><a class="mdi-social-plus-one btn btn-default "
-                                           ng-show="vm.selectedMember"
-                                           ng-click="vm.addMembers()"></a></center>
-
-                                <li ng-repeat="member in vm.groupMembers">
-                                    {{ member }}
-                                </li>
-
-
-                            </div>
-
-                            <div class="form-group">
-                                <button data-toggle="collapse" data-target="#add_group" type="submit"
-                                        class="btn btn-default">
-                                    Create Group
-                                </button>
-                            </div>
-                        </form>
+                    <div ng-show="vm.hasGroups">
+                        <div ng-show="vm.hasOwnedGroups && vm.myUserType == 'teacher'">
+                            <li ng-repeat="group in vm.ownedGroups">
+                                <a class="btn btn-flat btn-default btn-nopadding"
+                                   ng-click="vm.groupClick(group)"
+                                   href="javascript:void(0)"
+                                   ng-show="vm.isAuthenticated"
+                                   ng-dialog="/static/templates/groups/group.html"
+                                   ng-dialog-data="{{ group }}"><p class="group_button_text"
+                                                                   align="left">{{ group.name }}</p></a>
+                            </li>
+                            <br>
+                        </div>
+                        <div ng-show="vm.hasMemberOfGroups && vm.myUserType == 'student'">
+                            <li ng-repeat="group in vm.memberOfGroups">
+                                <a class="btn btn-flat btn-default btn-nopadding"
+                                   ng-click="vm.groupClick(group)"
+                                   href="javascript:void(0)"
+                                   ng-show="vm.isAuthenticated"
+                                   ng-dialog="/static/templates/groups/group.html"
+                                   ng-dialog-data="{{ group }}"><p class="group_button_text"
+                                                                   align="left">{{ group.name }}</p></a>
+                            </li>
+                        </div>
                     </div>
-                </center>
-                <br>
-
-                <div ng-show="vm.hasGroups">
-                    <div ng-show="vm.hasOwnedGroups"><p class="groups_underline" align="left">Groups I own</p>
-                        <li ng-repeat="group in vm.ownedGroups">
-                            <a class="btn btn-flat btn-default btn-nopadding"
-                               ng-click="vm.groupClick(group)"
-                               href="javascript:void(0)"
-                               ng-show="vm.isAuthenticated"
-                               ng-dialog="/static/templates/groups/group.html"
-                               ng-dialog-data="{{ group }}"><p class="group_button_text"
-                                                               align="left">{{ group.name }}</p></a>
-                        </li>
-                        <br>
-                    </div>
-                    <div ng-show="vm.hasMemberOfGroups"><p class="groups_underline" align="left">Groups I'm a member
-                        of</p>
-                        <li ng-repeat="group in vm.memberOfGroups">
-                            <a class="btn btn-flat btn-default btn-nopadding"
-                               ng-click="vm.groupClick(group)"
-                               href="javascript:void(0)"
-                               ng-show="vm.isAuthenticated"
-                               ng-dialog="/static/templates/groups/group.html"
-                               ng-dialog-data="{{ group }}"><p class="group_button_text"
-                                                               align="left">{{ group.name }}</p></a>
-                        </li>
-                    </div>
-                </div>
-                <h5 ng-hide="vm.hasGroups"> {{ vm.myUsername }} has no groups :(</h5>
-            </accordion-group>
+                    <h5 ng-hide="vm.hasGroups"> {{ vm.myUsername }} has no classes</h5>
+                </accordion-group>
+            </div>
         </accordion>
     </div>
 
@@ -180,16 +188,17 @@
 
 <!-- there is trouble with replacing these -->
 
-<a class="mdi-social-group btn btn-default btn-fab btn-raised btn-add-new-friend btn-hover"
+<a class="mdi-social-group btn btn-default btn-fab btn-raised btn-add-new-friend btn-hover btn-socialbar"
    style="background-color:#2196f3; color:#333333"
    ng-click="vm.closeAccords()"
    ng-show="vm.isAuthenticated">
-    <md-tooltip md-direction="left">Social Bar</md-tooltip>
+    <md-tooltip md-direction="left">Classrooms</md-tooltip>
 </a>
 
 
-<md-button class="mdi-social-notifications btn btn-default btn-fab btn-raised btn-notifications btn-hover"
-           ng-show="vm.hasNotifications"><span style="font-size: 12px">{{ vm.numNotifications }}</span></md-button>
+<a class="mdi-social-notifications btn btn-default btn-fab btn-raised btn-notifications btn-hover btn-socialbar"
+   ng-click="vm.showNotificationsTab()"
+   ng-show="vm.hasNotifications"><span style="font-size: 12px">{{ vm.numNotifications }}</span></a>
 
 <md-button class="md-fab btn-before md-primary btn-hover"
            aria-label="before"
@@ -231,7 +240,7 @@
            ng-dialog-data="{{ vm.shareable }}"
            ng-dialog-controller="NewSignupController as vm">
     <md-icon md-svg-src="/static/lib/img/border-color.svg"></md-icon>
-    <md-tooltip md-direction="left">Sign Ups</md-tooltip>
+    <md-tooltip md-direction="left">Meetings</md-tooltip>
 </md-button>
 
 <md-button class="md-fab btn-add-new-post md-primary btn-hover"
@@ -241,13 +250,13 @@
            ng-dialog-data="{{ vm.shareable }}"
            ng-dialog-controller="NewPostController as vm">
     <md-icon md-svg-src="/static/lib/img/add.svg"></md-icon>
-    <md-tooltip md-direction="left">New Event</md-tooltip>
+    <md-tooltip md-direction="left">Assignment</md-tooltip>
 </md-button>
 
 
 <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),
-            showLeftPushArray = document.getElementsByClassName('mdi-social-group btn btn-default btn-fab btn-raised btn-add-new-friend btn-hover'),
+            showLeftPushArray = document.getElementsByClassName('btn-socialbar'),
             showLeftPush = showLeftPushArray[0],
             body = document.body;
     showLeftPush.onclick = function () {

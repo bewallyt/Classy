@@ -15,7 +15,8 @@
             'classy.utils',
             'ui.bootstrap',
             'angucomplete',
-            'ngMaterial'
+            'ngMaterial',
+            'ngAnimate'
         ]).config(function ($mdThemingProvider) {
             $mdThemingProvider.theme('default')
                 .primaryPalette('blue', {

@@ -98,7 +98,8 @@
 
             username = Authentication.getAuthenticatedAccount().username;
             vm.myUsername = username;
-            vm.myUserType = username.userType;
+            vm.myUserType = Authentication.getAuthenticatedAccount().userType;
+            console.log('usertype' + vm.myUserType);
 
             var date = new Date();
             var num_month = date.getMonth();

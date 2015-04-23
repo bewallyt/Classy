@@ -1,9 +1,29 @@
 <center><h2>{{ ngDialogData.name }}</h2></center>
-<center><h5>Created on: {{ ngDialogData.created_at | date:'MM-dd-yyyy' }}</h5></center>
 <br>
-<center><h4>Owner: {{ ngDialogData.owner.username }} </h4></center>
+<center><h4>Teacher: {{ ngDialogData.owner.username }} </h4></center>
 <center><h5>{{ ngDialogData.owner.email }}</h5></center>
 
 <br>
-Members:
-<li ng-repeat="member in ngDialogData.members">{{ member.username }} - {{ member.email }}</li>
+
+<accordion close-others="vm.oneAtATime">
+    <accordion-group is-open="vm.isFourthOpen"
+                     is-disabled="status.isFourthDisabled">
+        <accordion-heading>
+            Students<i class="pull-right glyphicon"
+                       ng-class="{'glyphicon-chevron-down': vm.isFourthOpen, 'glyphicon-chevron-right': !vm.isFourthOpen}"></i>
+        </accordion-heading>
+        <li ng-repeat="member in ngDialogData.members">{{ member.username }} - {{ member.email }}</li>
+
+    </accordion-group>
+
+    <accordion-group is-open="vm.isFifthOpen"
+                     is-disabled="status.isFourthDisabled">
+        <accordion-heading>
+            Assignments<i class="pull-right glyphicon"
+                       ng-class="{'glyphicon-chevron-down': vm.isFifthOpen, 'glyphicon-chevron-right': !vm.isFifthOpen}"></i>
+        </accordion-heading>
+        <li ng-repeat="member in ngDialogData.members">{{ member.username }} - {{ member.email }}</li>
+
+    </accordion-group>
+</accordion>
+
