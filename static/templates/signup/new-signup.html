@@ -43,12 +43,12 @@
                 <input required id="blocks" type="number" name="quantity" min="1" max="7" ng-model="vm.numBlocks">
             </md-input-container>
         </div>
-        <div ng-show="vm.numBlocks">
-            <div ng-repeat="i in vm.getNumber(vm.numBlocks) track by $index">
+        <div class="fader" ng-show="vm.numBlocks">
+            <div class="fader" ng-repeat="i in vm.getNumber(vm.numBlocks) track by $index">
                 <br>
                 <center><b>Block {{ $index + 1 }} </b></center>
 
-                <div layout layout-sm="column">
+                <div class = "fader" layout layout-sm="column">
                     <md-input-container flex>
                         <label style="color:#545454">Date</label>
                         <input required type="date" ng-model="vm.dates[$index]">
@@ -74,7 +74,7 @@
 
         <div>
             <br>
-            <angucomplete class="change_angucomplate" id="search" pause="100" selectedobject="vm.selectedGroup"
+            <angucomplete class="fader change_angucomplate" id="search" pause="100" selectedobject="vm.selectedGroup"
                           localdata="ngDialogData" titlefield="name" searchfields="name"
                           minlength="1"
                           inputclass="form-control2" matchclass="highlight"
@@ -84,7 +84,7 @@
                        ng-show="vm.selectedGroup"
                        ng-click="vm.addGroups()"></a></center>
 
-            <li ng-repeat="(group, rule) in vm.groups">{{ group }}</li>
+            <li class="fader" ng-repeat="(group, rule) in vm.groups">{{ group }}</li>
         </div>
 
         <div class="form-group" layout="column" layout-align="center center">

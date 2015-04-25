@@ -16,7 +16,8 @@
             'ui.bootstrap',
             'angucomplete',
             'ngMaterial',
-            'ngAnimate'
+            'ngAnimate',
+            'youtube-embed'
         ]).config(function ($mdThemingProvider) {
             $mdThemingProvider.theme('default')
                 .primaryPalette('blue', {

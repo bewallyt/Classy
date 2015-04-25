@@ -20,6 +20,8 @@
         vm.columns = [];
 
         vm.init = init;
+        vm.youtubeInit = youtubeInit;
+        vm.hasVideo;
 
         vm.hasReponses = false;
         vm.hasConfirmedGroups = false;
@@ -68,6 +70,19 @@
         // Reformat Time
         vm.blockDates = [];
         vm.parseSlotTimes = parseSlotTimes;
+
+        function youtubeInit(url){
+
+            if(url != null){
+                vm.youtubeID = url.split("=")[1];
+                console.log('youtubeID: ' + vm.youtubeID);
+                vm.hasVideo = true;
+            }
+            else{
+                vm.hasVideo = false;
+            }
+
+        }
 
 
         function init(id) {

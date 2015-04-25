@@ -1,5 +1,5 @@
 <form role="form" ng-submit="vm.submit()">
-    <div class="form-group">
+    <div class="fader form-group">
         <center><h2>New Assignment</h2></center>
 
         <md-input-container>
@@ -14,13 +14,18 @@
             <input required type="date" ng-model="vm.start_time">
         </md-input-container>
 
+        <md-input-container flex>
+            <label style="color:#545454">Video URL</label>
+            <input type="text" ng-model="vm.videoUrl">
+        </md-input-container>
+
         <md-checkbox aria-label="is_repeating" class="is_repeating" ng-model="vm.is_repeating"
                      ng-hide="vm.pud_time == true">Repeating Assignment
         </md-checkbox>
 
-        <div ng-show="vm.is_repeating == true">
-            <md-radio-group ng-model="vm.repeat">
-                <div layout layout-sm="column" layout-align="center center">
+        <div class="fader" ng-show="vm.is_repeating == true">
+            <md-radio-group class="fader" ng-model="vm.repeat">
+                <div class="fader" layout layout-sm="column" layout-align="center center">
                     <md-radio-button value='Daily'>Daily</md-radio-button>
                     <md-radio-button value='Weekly'>Weekly</md-radio-button>
                     <md-radio-button value='Monthly'>Monthly</md-radio-button>
@@ -37,20 +42,21 @@
         <div>
             <center>Assign to Whom</center>
             <br>
-            <angucomplete class="change_angucomplate" id="search" pause="100" selectedobject="vm.selectedGroup"
+            <angucomplete class="fader change_angucomplate" id="search" pause="100" selectedobject="vm.selectedGroup"
                           localdata="ngDialogData" titlefield="name" searchfields="name"
                           minlength="1"
                           inputclass="form-control2" matchclass="highlight"
                           placeholder="Search Groups and Followers"/>
 
-            <center><a class="absolute mdi-social-plus-one btn btn-default "
+            <center><a class="fader absolute mdi-social-plus-one btn btn-default "
                        ng-show="vm.selectedGroup"
                        ng-click="vm.addGroups()"></a></center>
 
             <li ng-repeat="(group, rule) in vm.groupRuleDict">{{ group }}</li>
         </div>
 
-        <md-checkbox aria-label="notification" class="notification" ng-model="vm.notification">Notify Students of Due Date
+        <md-checkbox aria-label="notification" class="fader notification" ng-model="vm.notification">Notify Students of
+            Due Date
         </md-checkbox>
         <md-input-container>
             <label ng-show="vm.notification == true" style="color:#545454">Notification Time</label>
@@ -58,7 +64,7 @@
                    ng-show="vm.notification == true"/>
         </md-input-container>
 
-        <div class="form-group" layout="column" layout-align="center center">
+        <div class="fader form-group" layout="column" layout-align="center center">
             <md-button class="md-raised md-primary btn-submit" type="submit">Assign</md-button>
         </div>
 

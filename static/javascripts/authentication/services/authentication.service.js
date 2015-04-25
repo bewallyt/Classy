@@ -85,10 +85,10 @@
             function loginSuccessFn(data, status, headers, config) {
                 Authentication.setAuthenticatedAccount(data.data);
                 console.log('login successful:' + data.data.userType);
-                if (data.data.userType == 'student') {
+                if (data.data.userType == 'Student') {
                     window.location = '/classy';
                 }
-                else if (data.data.userType == 'teacher') {
+                else if (data.data.userType == 'Teacher') {
                     window.location = '/classy';
                 }
                 else {
@@ -125,7 +125,7 @@
             function logoutSuccessFn(data, status, headers, config) {
                 Authentication.unauthenticate();
 
-                window.location = '/login';
+                window.location = '/';
             }
 
             /**

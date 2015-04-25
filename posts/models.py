@@ -45,6 +45,10 @@ class Post(models.Model):
 
     is_updated = models.BooleanField(default=False)
 
+    # for Classy
+
+    youtube_url = models.CharField(max_length=200, blank=True, default='none')
+
 
 
     '''

@@ -48,7 +48,7 @@
          * @memberOf classy.posts.services.Posts
          */
         function create(content, start_time, notification, notify_when, repeat, location_event, description_event, begin_time, end_time,
-                        end_repeat, not_all_day, day_of_week, need_repeat, week_num, is_week_set, pud_time, pud, duration) {
+                        end_repeat, not_all_day, day_of_week, need_repeat, week_num, is_week_set, pud_time, pud, duration, videoUrl) {
 
             if (end_repeat === null) end_repeat = start_time;
             return $http.post('/api/v1/posts/', {
@@ -69,7 +69,8 @@
                 is_week_set: is_week_set,
                 pud_time: pud_time,
                 pud: pud,
-                duration: duration
+                duration: duration,
+                youtube_url: videoUrl
             });
         }
 

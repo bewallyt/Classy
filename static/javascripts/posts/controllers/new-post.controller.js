@@ -177,7 +177,7 @@
 
             Posts.create(vm.content, vm.start_time, vm.notification, vm.notify_when, vm.repeat, vm.location_event,
                 vm.description_event, vm.begin_time, vm.end_time, vm.end_repeat, vm.not_all_day, dayOfWeek,
-                vm.need_repeat, weekNum, isWeekSet, vm.pud_time, pud, vm.duration).then(createPostSuccessFn, createPostErrorFn);
+                vm.need_repeat, weekNum, isWeekSet, vm.pud_time, pud, vm.duration, vm.videoUrl).then(createPostSuccessFn, createPostErrorFn);
 
             $rootScope.$broadcast('post.created', {
                 content: vm.content,
@@ -197,6 +197,7 @@
                 pud_time: vm.pud_time,
                 pud: pud,
                 duration: vm.duration,
+                videoUrl: vm.videoUrl,
                 author: {
                     username: Authentication.getAuthenticatedAccount().username
                 }

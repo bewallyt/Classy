@@ -96,6 +96,9 @@
             // Left Side Bar
             vm.leftToggle = leftToggle;
 
+            // for classy
+            vm.videoUrl;
+
             username = Authentication.getAuthenticatedAccount().username;
             vm.myUsername = username;
             vm.myUserType = Authentication.getAuthenticatedAccount().userType;

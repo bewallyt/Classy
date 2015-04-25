@@ -1,51 +1,54 @@
-.btn-add-new-post {
-    position: fixed;
-    bottom: 1%;
-    right: 1%;
-    z-index: 20;
-}
-
-.btn-new-signup {
-    position: fixed;
-    bottom: 9%;
-    right: 1%;
-    z-index: 19;
-}
-
 .btn-add-new-friend {
     position: fixed;
-    bottom: 17%;
+    bottom: 1%;
     right: 1%;
     z-index: 16;
 }
 
 .btn-home {
     position: fixed;
-    bottom: 25%;
+    bottom: 9%;
     right: 1%;
     z-index: 15;
 }
 
 .btn-change-date {
     position: fixed;
-    bottom: 33%;
+    bottom: 17%;
     right: 1%;
     z-index: 14;
 }
 
+
 .btn-before {
     position: fixed;
-    bottom: 41%;
+    bottom: 25%;
     right: 1%;
     z-index: 13;
 }
 
 .btn-next {
     position: fixed;
-    bottom: 49%;
+    bottom: 33%;
     right: 1%;
     z-index: 12;
 }
+
+.btn-add-new-post {
+    position: fixed;
+    bottom: 49%;
+    right: 1%;
+    z-index: 20;
+}
+
+.btn-new-signup {
+    position: fixed;
+    bottom: 41%;
+    right: 1%;
+    z-index: 19;
+}
+
+
 
 .btn-notifications {
     position: fixed;
