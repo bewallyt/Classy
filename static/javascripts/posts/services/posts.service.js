@@ -24,7 +24,8 @@
             pudPostUpdate: pudPostUpdate,
             getNotificationPosts: getNotificationPosts,
             getSharedFollowing: getSharedFollowing,
-            updateEvent: updateEvent
+            updateEvent: updateEvent,
+            createTweets: createTweets
         };
 
         return Posts;
@@ -48,7 +49,7 @@
          * @memberOf classy.posts.services.Posts
          */
         function create(content, start_time, notification, notify_when, repeat, location_event, description_event, begin_time, end_time,
-                        end_repeat, not_all_day, day_of_week, need_repeat, week_num, is_week_set, pud_time, pud, duration, videoUrl) {
+                        end_repeat, not_all_day, day_of_week, need_repeat, week_num, is_week_set, pud_time, pud, duration, videoUrl, hashtag) {
 
             if (end_repeat === null) end_repeat = start_time;
             return $http.post('/api/v1/posts/', {
@@ -70,7 +71,8 @@
                 pud_time: pud_time,
                 pud: pud,
                 duration: duration,
-                youtube_url: videoUrl
+                youtube_url: videoUrl,
+                hashtag: hashtag
             });
         }
 
@@ -139,5 +141,13 @@
         function getNotificationPosts(){
             return $http.get('/api/v1/notification_posts/');
         }
+
+        function createTweets(hashtag){
+             return $http.post('/api/v1/twitter/', {
+                hashtag: hashtag
+             });
+        }
+
+
     }
 })();

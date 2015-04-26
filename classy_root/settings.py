@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'groups',
     'access',
     'signup',
+    'tweets',
 )
 
 TEMPLATE_LOADERS = (

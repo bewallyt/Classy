@@ -13,7 +13,6 @@ from mail.mail import send_post, send_shared_post
 import datetime
 
 
-
 '''
     Create a new post. The create call uses the PoserSerializer to deserialize the HTTP request and create a new
     post object and save it.

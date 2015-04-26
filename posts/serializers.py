@@ -20,7 +20,7 @@ class PostSerializer(serializers.ModelSerializer):
                   'notify_when', 'repeat',
                   'location_event', 'description_event', 'begin_time', 'end_time', 'end_repeat', 'show_date',
                   'show_begin_time', 'show_end_time', 'not_all_day', 'day_of_week', 'need_repeat', 'is_week_set',
-                  'week_num', 'duration', 'pud', 'pud_time', 'is_holiday', 'is_updated', 'youtube_url')
+                  'week_num', 'duration', 'pud', 'pud_time', 'is_holiday', 'is_updated', 'youtube_url', 'hashtag')
         read_only_fields = ('id', 'created_at', 'updated_at')
 
     def get_validation_exclusions(self, *args, **kwargs):
@@ -36,7 +36,7 @@ class SharedPostSerializer(serializers.ModelSerializer):
         fields = ('id', 'author', 'content', 'created_at', 'updated_at', 'start_time', 'repeat',
                   'location_event', 'description_event', 'begin_time', 'end_time', 'end_repeat', 'show_date',
                   'show_begin_time', 'show_end_time', 'not_all_day', 'day_of_week', 'need_repeat', 'is_week_set',
-                  'week_num', 'duration', 'pud', 'pud_time', 'is_holiday', 'is_updated', 'youtube_url')
+                  'week_num', 'duration', 'pud', 'pud_time', 'is_holiday', 'is_updated', 'youtube_url', 'hashtag')
         read_only_fields = ('id', 'created_at', 'updated_at')
 
 

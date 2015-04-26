@@ -13,7 +13,11 @@ from access.views import AccessViewSet, AccountAccessViewSet, NotificationRespon
 from signup.views import SignUpCreateAndListView, SignUpView
 
 # Base router
+from tweets.views import TwitterViewSet
+
 router = routers.SimpleRouter()
+# Twitter ViewSet is in Posts Application
+router.register(r'twitter', TwitterViewSet)
 router.register(r'accounts', AccountViewSet)
 router.register(r'posts', PostViewSet)
 router.register(r'groups', GroupViewSet)

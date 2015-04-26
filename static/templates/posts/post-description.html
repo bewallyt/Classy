@@ -2,8 +2,12 @@
 </div>
 <div class="top_corner_div" ng-init="vm.youtubeInit(ngDialogData.youtube_url)">
 </div>
+
+<div class="top_corner_div" ng-init="vm.hashtagInit(ngDialogData.hashtag)">
+</div>
 <br>
 <center><h2>{{ ngDialogData.content }}</h2></center>
+<center><h4>{{ ngDialogData.hashtag }}</h4></center>
 <center><h5 ng-hide="ngDialogData.is_holiday">Due on {{ ngDialogData.day_of_week }}, {{ ngDialogData.show_date }}</h5>
 </center>
 <br>
@@ -20,9 +24,30 @@
 <div ng-show="vm.youtubeID" layout layout-align="center center">
     <youtube id="{{ vm.youtubeID }}" width="340" height="195"></youtube>
 </div>
-
-
 <br>
+<div ng-hide="vm.isSignup || ngDialogData.is_holiday">
+    <accordion close-others="vm.post_description_close2">
+        <accordion-group>
+            <accordion-heading>
+                <md-icon md-svg-src="/static/lib/img/twitter.svg"></md-icon>
+                Tweets
+                <i
+                        class="pull-right glyphicon"></i>
+            </accordion-heading>
+
+            <h5 ng-hide="vm.hasTweets"> Currently No Tweets About this Assignment</h5>
+
+            <div class="faderLong" ng-show="vm.hasTweets">
+                <li class="faderLong" ng-repeat="tweet in vm.tweets">
+                    {{ tweet.author }}: {{ tweet.content }}
+                </li>
+            </div>
+
+        </accordion-group>
+
+    </accordion>
+</div>
+
 
 <div layout layout-align="center">
     <md-progress-circular md-mode="indeterminate" ng-show="vm.isLoading"></md-progress-circular>
@@ -167,6 +192,30 @@
                 <p align="left">
                     Haven't Started:</p>
                 <li ng-repeat="user in vm.noRespGroups">
+                    <p align="left">
+                        {{ user.name }}</p>
+                </li>
+            </div>
+            <div ng-show="vm.hasDeclinedGroups">
+                <p align="left">
+                    Needs Help:</p>
+                <li ng-repeat="user in vm.declinedGroups">
+                    <p align="left">
+                        {{ user.name }}</p>
+                </li>
+            </div>
+            <div ng-show="vm.hasDeclinedGroups">
+                <p align="left">
+                    Needs Help:</p>
+                <li ng-repeat="user in vm.declinedGroups">
+                    <p align="left">
+                        {{ user.name }}</p>
+                </li>
+            </div>
+            <div ng-show="vm.hasRemovedGroups">
+                <p align="left">
+                    Turned in Late:</p>
+                <li ng-repeat="user in vm.removedGroups">
                     <p align="left">
                         {{ user.name }}</p>
                 </li>

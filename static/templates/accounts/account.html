@@ -24,8 +24,7 @@
                     </accordion-heading>
                     <br>
 
-                    <div ng-show="vm.hasNotifications == true"><p class="fader groups_underline" align="left">New
-                        Notifications</p>
+                    <div ng-show="vm.hasNotifications == true">
                         <li ng-repeat="notification in vm.newNotifications">
                             <a class="fader btn btn-flat btn-default btn-nopadding"
                                ng-click="vm.groupClick(group)"
@@ -188,7 +187,7 @@
 
 <!-- there is trouble with replacing these -->
 
-<a class="mdi-social-group btn btn-default btn-fab btn-raised btn-add-new-friend btn-hover btn-socialbar"
+<a class="mdi-social-group btn btn-default btn-fab btn-raised btn-add-new-friend btn-hover"
    style="background-color:#2196f3; color:#333333"
    ng-click="vm.closeAccords()"
    ng-show="vm.isAuthenticated">
@@ -196,7 +195,8 @@
 </a>
 
 
-<a class="fader mdi-social-notifications btn btn-default btn-fab btn-raised btn-notifications btn-hover btn-socialbar"
+<a class="faderLong mdi-social-notifications btn btn-default btn-fab btn-raised btn-notifications btn-hover"
+   id="showLeftPush2"
    ng-click="vm.showNotificationsTab()"
    ng-show="vm.hasNotifications"><span style="font-size: 12px">{{ vm.numNotifications }}</span></a>
 
@@ -256,10 +256,16 @@
 
 <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'),
-            showLeftPushArray = document.getElementsByClassName('btn-socialbar'),
+            showLeftPushArray = document.getElementsByClassName('mdi-social-group btn btn-default btn-fab btn-raised btn-add-new-friend btn-hover'),
             showLeftPush = showLeftPushArray[0],
+            showLeftPush1 = document.getElementById('showLeftPush2'),
             body = document.body;
     showLeftPush.onclick = function () {
+        classie.toggle(this, 'active');
+        classie.toggle(body, 'cbp-spmenu-push-toright');
+        classie.toggle(menuLeft, 'cbp-spmenu-open');
+    };
+    showLeftPush1.onclick = function () {
         classie.toggle(this, 'active');
         classie.toggle(body, 'cbp-spmenu-push-toright');
         classie.toggle(menuLeft, 'cbp-spmenu-open');

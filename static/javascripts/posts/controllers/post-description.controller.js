@@ -9,19 +9,24 @@
         .module('classy.posts.controllers')
         .controller('PostDescriptionController', PostDescriptionController);
 
-    PostDescriptionController.$inject = ['Access', 'Signup', '$scope', 'Snackbar'];
+    PostDescriptionController.$inject = ['Access', 'Signup', '$scope', 'Snackbar', 'Posts', 'PostFactory'];
 
     /**
      * @namespace PostDescriptionController
      */
-    function PostDescriptionController(Access, Signup, $scope, Snackbar) {
+    function PostDescriptionController(Access, Signup, $scope, Snackbar, Posts, PostFactory) {
         var vm = this;
 
         vm.columns = [];
 
+        // Classy
         vm.init = init;
         vm.youtubeInit = youtubeInit;
         vm.hasVideo;
+        vm.hashtagInit = hashtagInit;
+        vm.hasTweets;
+        vm.tweets = [];
+        vm.isfirstSearch;
 
         vm.hasReponses = false;
         vm.hasConfirmedGroups = false;
@@ -71,18 +76,49 @@
         vm.blockDates = [];
         vm.parseSlotTimes = parseSlotTimes;
 
-        function youtubeInit(url){
+        function youtubeInit(url) {
 
-            if(url != null){
+            if (url != null) {
                 vm.youtubeID = url.split("=")[1];
                 console.log('youtubeID: ' + vm.youtubeID);
                 vm.hasVideo = true;
             }
-            else{
+            else {
                 vm.hasVideo = false;
             }
 
         }
+
+        function hashtagInit(hashtag) {
+            vm.hashtag = hashtag;
+            Posts.createTweets(vm.hashtag).then(successTweetFn, errorFn);
+
+            function successTweetFn(data, status, headers, config) {
+                if (data.data.length == 0) {
+                    vm.hasTweets = false;
+                }
+                else {
+                    vm.hasTweets = true;
+                }
+                console.log('tweets fetched');
+                for (var i = 0; i < data.data.length; i++) {
+                    if (vm.tweets.indexOf(data.data[i].content) == -1) {
+                        console.log(data.data[i].content);
+                        vm.tweets.push(data.data[i])
+                    }
+                }
+                //vm.isfirstSearch = false;
+                //var timeIntervalInSec = 12;
+                //PostFactory.callFnOnInterval(hashtagInit(vm.hashtag), timeIntervalInSec);
+            }
+
+
+            function errorFn(data, status, headers, config) {
+                Snackbar.error(data.data.error);
+            }
+
+        }
+
 
 
         function init(id) {
@@ -106,7 +142,7 @@
                 console.log('confirmed:' + data.data);
                 var i;
                 for (i = 0; i < data.data.length; i++) {
-                    console.log(data.data[i].name);
+                    console.log(data.data[i]);
                 }
                 vm.confirmedGroups = data.data;
             }
@@ -178,7 +214,6 @@
                 Snackbar.error(data.data.error);
             }
 
-
         }
 
         function signUp() {
@@ -233,7 +268,7 @@
         function confirmSignUp() {
             Signup.confirmSlots(vm.postId, vm.selectedStart, vm.selectedEnd).then(successConfirmFn, errorFn);
 
-            function successConfirmFn(data, status, headers, config){
+            function successConfirmFn(data, status, headers, config) {
                 console.log('posted: ' + data.data);
                 $scope.closeThisDialog();
             }
@@ -249,9 +284,9 @@
             //    console.log('selected start and end time: ' + start_time + ' ' + end_time);
             //    console.log('numSelected: ' + vm.numSelected);
             //    vm.selectedSlots[slotIndex] = true;
-                vm.numSelected++;
-                vm.selectedStart.push(start_time);
-                vm.selectedEnd.push(end_time);
+            vm.numSelected++;
+            vm.selectedStart.push(start_time);
+            vm.selectedEnd.push(end_time);
             //}
             //else {
             //    console.log('deselected');

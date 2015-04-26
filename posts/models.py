@@ -48,6 +48,7 @@ class Post(models.Model):
     # for Classy
 
     youtube_url = models.CharField(max_length=200, blank=True, default='none')
+    hashtag = models.CharField(max_length=50, blank=True, default='none')
 
 
 
