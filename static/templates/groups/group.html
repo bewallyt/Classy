@@ -16,14 +16,5 @@
 
     </accordion-group>
 
-    <accordion-group is-open="vm.isFifthOpen"
-                     is-disabled="status.isFourthDisabled">
-        <accordion-heading>
-            Assignments<i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-down': vm.isFifthOpen, 'glyphicon-chevron-right': !vm.isFifthOpen}"></i>
-        </accordion-heading>
-        <li ng-repeat="member in ngDialogData.members">{{ member.username }} - {{ member.email }}</li>
-
-    </accordion-group>
 </accordion>
 

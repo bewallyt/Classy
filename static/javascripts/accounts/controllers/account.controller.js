@@ -238,6 +238,10 @@
                     vm.hasOwnedGroups = true;
                 }
                 vm.ownedGroups = data.data;
+                console.log('classes');
+                for(var i = 0; i < data.data.length; i++){
+                    console.log(data.data);
+                }
                 Groups.get(username).then(groupsSuccessFn, groupsErrorFn);
 
             }

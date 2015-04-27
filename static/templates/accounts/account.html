@@ -28,7 +28,7 @@
                         <li ng-repeat="notification in vm.newNotifications">
                             <a class="fader btn btn-flat btn-default btn-nopadding"
                                ng-click="vm.groupClick(group)"
-                               href="javascript:void(0)"
+                               href="javascriplasses:void(0)"
                                ng-show="vm.isAuthenticated"
                                ng-dialog="/static/templates/posts/notifications.html"
                                ng-dialog-controller="AccountController as vm"
@@ -156,6 +156,7 @@
                                    href="javascript:void(0)"
                                    ng-show="vm.isAuthenticated"
                                    ng-dialog="/static/templates/groups/group.html"
+                                   ng-dialog-controller="GroupController as vm"
                                    ng-dialog-data="{{ group }}"><p class="group_button_text"
                                                                    align="left">{{ group.name }}</p></a>
                             </li>

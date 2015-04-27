@@ -13,48 +13,33 @@
         .module('classy.groups.controllers')
         .controller('GroupController', GroupController);
 
-    GroupController.$inject = ['$scope', '$rootScope', '$window', 'Groups'];
+    GroupController.$inject = ['$scope', '$rootScope', '$window', 'Posts', 'Authentication'];
 
     /**
      * @namespace GroupController
      */
-    function GroupController($scope, $rootScope, $window, Groups) {
+    function GroupController($scope, $rootScope, $window, Posts, Authentication) {
         var vm = this;
-        $rootScope.name;
+        vm.assignments = [];
+
+
+        function activate() {
+            console.log('group controller activated');
+            var promise = Posts.all;
 
 
 
-        $rootScope.$on('group.clicked', function (event, group) {
-            console.log('group clicked: ');
-            Groups.getSpecific(group.created_at).then(groupSuccessFn, groupErrorFn);
-        });
-
-        function groupSuccessFn(data, status, headers, config) {
-
-            console.log(data.data);
-            vm.name = data.data[0].name;
-            $rootScope.name = data.data[0].name;
-            vm.owner = data.data[0].owner.username;
-            vm.members = data.data[0].members;
-
-            console.log('vm.name: ' + vm.name);
-            console.log('vm.owner: ' + vm.owner);
-            console.log('vm.members: ' + vm.members);
-        }
-
-
-        function groupErrorFn(data, status, headers, config) {
-            Snackbar.error(data.data.error);
-        }
-
-        $scope.$watch(function () {
-                console.log('rootscopename: ' + $rootScope.name);
-                return vm.name
-            },
-            function () {
+            function sharedFollowingSuccessFn(data, status, headers, config) {
+                console.log('fetching assignmnet');
+                for (var i = 0; i < data.data.length; i++) {
+                    console.log(data.data[i]);
+                }
             }
-        );
 
+            function sharedFollowingErrorFn(data, status, headers, config) {
+                Snackbar.error(data.data.error);
+            }
+        }
 
     }
 })();
